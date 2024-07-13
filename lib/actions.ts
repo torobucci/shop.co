@@ -107,3 +107,30 @@ async function createProduct(prevState: State, formData: FormData) {
 }
 
 export default createProduct;
+
+export async function increaseQuantity(cart_item_id:number){
+ try{
+  await sql `
+  UPDATE shopco_shopping_cart_items
+  SET quantity = quantity + 1
+  WHERE cart_item_id = ${cart_item_id}`
+
+    revalidatePath('/home/cart')
+ }
+ catch(error){
+  console.log('failed to increase quantity of product',error)
+ }
+}
+
+export async function decreaseQuantity(cart_item_id:number){
+  try{
+   await sql `
+   UPDATE shopco_shopping_cart_items
+   SET quantity = quantity - 1
+   WHERE cart_item_id = ${cart_item_id} AND cart_item_id > 0`
+   revalidatePath('/home/cart')
+  }
+  catch(error){
+   console.log('failed to increase quantity of product',error)
+  }
+ }

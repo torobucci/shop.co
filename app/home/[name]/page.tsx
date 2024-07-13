@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: { name: string } }) {
                     <CategoryHeader />
                     <div className="grid grid-cols-3 gap-3">
                         {products.map((product, index) => {
-                            return <ProductItem index={index} name={product.name} price={product.price} imageUrl={product.image_url} /> // Corrected component name
+                            return <ProductItem index={index} category={params.name} name={product.name} id={product.id} price={product.price} imageUrl={product.image_url} /> // Corrected component name
                         })}
                     </div>
                 </div>
