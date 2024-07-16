@@ -6,9 +6,9 @@ export default async function Page(){
   const shoppingCartItems = await fetchShoppingCartItems(1)
 
   return(
-    <>
+    <div className="mx-12 pt-[74px] pb-28">
     <LinkHistory/>
     <ShoppingCartItems shoppingCartItems={shoppingCartItems}/>
-    </>
+    </div>
   )
 }

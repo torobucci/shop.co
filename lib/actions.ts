@@ -134,3 +134,16 @@ export async function decreaseQuantity(cart_item_id:number){
    console.log('failed to increase quantity of product',error)
   }
  }
+
+ export async function deleteCartItem(cart_item_id:number){
+  try{
+   await sql `
+   DELETE FROM shopco_shopping_cart_items
+   WHERE cart_item_id = ${cart_item_id}`
+   revalidatePath('/home/cart')
+  }
+  catch(error){
+   console.log('failed to increase quantity of product',error)
+  }
+ }
+

@@ -12,6 +12,15 @@ export type Product = {
     stock_quantity: number,
     image_url: string,
 }
+export type FilteredProduct = {
+    id: number,
+    name: string,
+    description: string,
+    price: number,
+    stock_quantity: number,
+    category_name:string,
+    image_url: string,
+}
 
 export type SpecificProduct={
     id:number,

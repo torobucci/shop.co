@@ -13,7 +13,11 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "imageBg":"url('../public/Rectangle 2.png')",
       },
+      colors:{
+        custom_grey:'#F2F0F1',
+      }
     },
   },
   plugins: [],

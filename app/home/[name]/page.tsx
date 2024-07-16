@@ -10,7 +10,7 @@ export default async function Page({ params }: { params: { name: string } }) {
 
 
     return (
-        <>
+        <div className="mx-12 pt-[74px] pb-28">
             <LinkHistory />
             <div className="flex">
                 <SideNav categories={categories} />
@@ -24,6 +24,6 @@ export default async function Page({ params }: { params: { name: string } }) {
                 </div>
             </div>
             {/* <Pagination/> */}
-        </>
+        </div>
     )
 }

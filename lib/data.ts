@@ -1,8 +1,9 @@
 'use server'
 import { sql } from '@vercel/postgres';
-import { unstable_noStore as noStore } from 'next/cache';
-import { Categories, SpecificProduct, cartId } from './definitions';
+import { unstable_noStore as noStore, revalidatePath } from 'next/cache';
+import { Categories, FilteredProduct, SpecificProduct, cartId } from './definitions';
 import { Product, ShoppingCartItem } from './definitions';
+import { redirect } from 'next/navigation';
 
 export async function fetchCategories() {
     noStore()
@@ -82,12 +83,14 @@ export async function addToCart(userId: number, productId: number, quantity: num
             ON CONFLICT ON CONSTRAINT shopco_shopping_cart_items_pkey
             DO UPDATE SET quantity = shopco_shopping_cart_items.quantity + 1
         `;
-
         console.log('Product added to cart successfully');
+
     } catch (err) {
         console.error('Error adding product to cart:', err);
     }
-    return Promise.resolve();
+    revalidatePath('/home/cart')
+    redirect('/home/cart')
+
 }
 export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCartItem[]> {
     try {
@@ -109,4 +112,34 @@ export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCa
         return Promise.resolve([]);
     }
 
+}
+
+export async function fetchFilteredProducts(query: string) {
+    try {
+        const products = await sql<FilteredProduct>`
+          SELECT
+            p.id,
+            p.name,
+            p.description,
+            p.price,
+            p.stock_quantity,
+            c.name,
+            i.image_url
+          FROM shopco_products p
+          JOIN shopco_categories c ON p.category_id = c.id
+          JOIN shopco_productimages i ON p.id = i.product_id
+          WHERE
+            p.name ILIKE ${`%${query}%`} OR
+            p.description ILIKE ${`%${query}%`} OR
+            p.price::text ILIKE ${`%${query}%`} OR
+            c.name ILIKE ${`%${query}%`}
+
+         AND i.is_primary = true
+        `;
+
+        return products.rows;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch invoices.');
+    }
 }
