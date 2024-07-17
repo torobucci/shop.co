@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { NavBar } from "../ui/navigation";
-import { fetchCategories } from "../lib/data";
-import { BottomNav } from "../ui/bottom_nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +14,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const categories = await fetchCategories()
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <NavBar categories={categories}/>
         <div>{children}</div>
-        <BottomNav/>
         </body>
     </html>
   );

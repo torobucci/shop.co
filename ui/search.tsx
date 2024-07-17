@@ -19,7 +19,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
       params.delete('query');
     }
     replace(`${pathname}?${params.toString()}`);
-    router.push(`/products/?${params?params.toString():''}`)
+    router.push(`/home/products/?${params?params.toString():''}`)
   },300)
   return (
     <div className="relative flex flex-1 flex-shrink-0">
@@ -27,7 +27,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
         Search
       </label>
       <input
-        className="block w-full rounded-2xl bg-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 border-none active:border-none"
+        className="block w-full focus:outline-none rounded-2xl bg-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 border-none active:border-none"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);

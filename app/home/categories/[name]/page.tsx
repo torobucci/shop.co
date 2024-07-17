@@ -1,8 +1,8 @@
-import { SideNav } from "../../../ui/home/side-nav"
-import { fetchCategories, fetchProductsByCategoryId } from "../../../lib/data"
-import ProductItem from "../../../ui/products/procuct-item"
-import LinkHistory from "../../../ui/home/nav-links"
-import CategoryHeader from "../../../ui/home/category-header"
+import { SideNav } from "../../../../ui/home/side-nav"
+import { fetchCategories, fetchProductsByCategoryId } from "../../../../lib/data"
+import ProductItem from "../../../../ui/products/procuct-item"
+import LinkHistory from "../../../../ui/home/nav-links"
+import CategoryHeader from "../../../../ui/home/category-header"
 
 export default async function Page({ params }: { params: { name: string } }) {
     const categories = await fetchCategories()

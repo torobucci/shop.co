@@ -16,7 +16,7 @@ export function SideNav({ categories }: { categories: Categories[] }) {
             <div>
                 {categories.map((category, index) => {
                     return (
-                        <Link href={`/home/${category.name}`} className={`${currentPath[currentPath.length-1]== category.name ?'bg-slate-200':''} flex items-center p-2 mb-[2px] rounded-md justify-between hover:bg-slate-200 text-black text-opacity-60`} key={index}>
+                        <Link href={`/home/categories/${category.name}`} className={`${currentPath[currentPath.length-1]== category.name ?'bg-slate-200':''} flex items-center p-2 mb-[2px] rounded-md justify-between hover:bg-slate-200 text-black text-opacity-60`} key={index}>
                             <p>{category.name}</p>
                             <FaAngleRight />
                         </Link>)

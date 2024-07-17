@@ -123,20 +123,17 @@ export async function fetchFilteredProducts(query: string) {
             p.description,
             p.price,
             p.stock_quantity,
-            c.name,
+            c.name as category_name,
             i.image_url
           FROM shopco_products p
           JOIN shopco_categories c ON p.category_id = c.id
-          JOIN shopco_productimages i ON p.id = i.product_id
+          JOIN shopco_productimages i ON p.id = i.product_id AND i.is_primary = true
           WHERE
             p.name ILIKE ${`%${query}%`} OR
             p.description ILIKE ${`%${query}%`} OR
             p.price::text ILIKE ${`%${query}%`} OR
             c.name ILIKE ${`%${query}%`}
-
-         AND i.is_primary = true
         `;
-
         return products.rows;
     } catch (error) {
         console.error('Database Error:', error);
