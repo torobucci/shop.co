@@ -2,8 +2,17 @@
 import { ShoppingCartItem } from "../../lib/definitions";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { increaseQuantity, decreaseQuantity, deleteCartItem } from "../../lib/actions";
+import { useEffect, useState } from "react";
 
 export default function ShoppingCartItems({ shoppingCartItems }: { shoppingCartItems: ShoppingCartItem[] }) {
+   const [totalCost,setTotalCost] = useState(0)
+   useEffect(()=>{
+     let cost = 0
+     shoppingCartItems.forEach(el=>{
+         cost+=el.price*el.quantity
+     })
+     setTotalCost(cost)
+   })
   return (
     <div>
       <h4 className="font-bold text-3xl my-2"></h4>
@@ -16,7 +25,7 @@ export default function ShoppingCartItems({ shoppingCartItems }: { shoppingCartI
                 <img src={cartItem.productimages[0]} alt="product image" className="w-[134px]" />
                 <div className="flex flex-col gap-1 text-xl uppercase font-semibold">
                   <h3>{cartItem.name}</h3>
-                  <p>{cartItem.price}</p>
+                  <p>{`$${cartItem.price}`}</p>
                 </div>
               </div>
               <div className="flex flex-col justify-between items-end">
@@ -36,15 +45,15 @@ export default function ShoppingCartItems({ shoppingCartItems }: { shoppingCartI
           <h4 className="font-bold text-2xl">Order Summary</h4>
           <div className="flex justify-between text-base py-1">
             <p className="text-gray-500">Subtotal</p>
-            <p className="font-bold">{`$500`}</p>
+            <p className="font-bold">{`$${totalCost.toFixed(2)}`}</p>
           </div>
           <div className="flex justify-between text-base py-1">
             <p className="text-gray-500">Delivery Fee</p>
-            <p className="font-bold">{`$25`}</p>
+            <p className="font-bold">{`$${(0.08*totalCost).toFixed(2)}`}</p>
           </div>
           <div className="flex justify-between text-base my-4 py-2 border-t-[1px] border-gray-300 font-bold">
             <p className="font-bold">Total</p>
-            <p className="font-bold">{`$525`}</p>
+            <p className="font-bold">{`$${(totalCost + 0.08*totalCost).toFixed(2)}`}</p>
           </div>
           <button className="bg-black w-full px-6 py-2.5 flex-[3] rounded-3xl  text-white" >Go to Checkout</button>
         </div>
