@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 export function NavBar({ categories }: { categories: Categories[] }) {
     const pathname = usePathname()
-    const notAtHome = pathname.length > 1
+    const notAtHome = pathname.length > 5
     return (
         <div className={`px-12 fixed z-10 w-full bg-white py-4 ${notAtHome?'pb-0':''}`}>
             <div className={`flex gap-3 items-center`}>

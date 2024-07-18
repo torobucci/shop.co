@@ -11,7 +11,7 @@ export default async function Page({ searchParams }: { searchParams?: { query?: 
                 {products.map((product, index) => {
                     return <div className="flex flex-col gap-y-2 gap-x-1 justify-start" key={index}>
                         <img className="w-[295px] h-[298px] rounded-lg" src={product.image_url} alt="productImage" />
-                        <Link href={`/home/${product.category_name}/${product.id}`} className="font-semibold text-black text-base">{product.name}</Link>
+                        <Link href={`/home/categories/${product.category_name}/${product.id}`} className="font-semibold text-black text-base">{product.name}</Link>
                         <p className="font-semibold text-black text-base">{`$${product.price}`}</p>
                         <p className="font-semibold text-black text-lg capitalize opacity-[0.6]">{`$${product.category_name}`}</p>
                     </div>
