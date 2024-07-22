@@ -22,19 +22,20 @@ export default function Search({ placeholder }: { placeholder: string }) {
     router.push(`/home/products/?${params?params.toString():''}`)
   },300)
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div className="xsm:w-full block xsm:flex items-center lg:flex-1 xsm:bg-gray-100 xsm:rounded-2xl xsm:py-[9px] xsm:px-4">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
+      <HiMagnifyingGlass className="text-lg text-gray-500 peer-focus:text-gray-900" />
       <input
-        className="block w-full focus:outline-none rounded-2xl bg-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 border-none active:border-none"
+        className="hidden xsm:block w-full focus:outline-none pl-2 bg-transparent text-sm outline-2 placeholder:text-gray-500 border-none active:border-none"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
         defaultValue={searchParams.get('query')?.toString()}
       />
-      <HiMagnifyingGlass className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+
     </div>
   );
 }

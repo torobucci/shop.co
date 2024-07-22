@@ -12,6 +12,7 @@ export type Product = {
     stock_quantity: number,
     image_url: string,
 }
+
 export type FilteredProduct = {
     id: number,
     name: string,
@@ -42,3 +43,10 @@ export type ShoppingCartItem={
 export type cartId = {
     cart_id:number,
 }
+
+export type User = {
+    id: string;
+    name: string;
+    email: string;
+    password_hash: string;
+  };

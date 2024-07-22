@@ -5,7 +5,8 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {storage} from '../firebaseConfig'
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
+import { AuthError } from 'next-auth';
+import { signIn } from '../auth';
 
 const ProductFormSchema = z.object({
   product: z.string({
@@ -146,4 +147,24 @@ export async function decreaseQuantity(cart_item_id:number){
    console.log('failed to increase quantity of product',error)
   }
  }
+
+ export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', { email: formData.get('email'), password: formData.get('password'), redirectTo: '/home/categories/Men' })
+  }
+  catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
 

@@ -17,6 +17,9 @@ const config: Config = {
       },
       colors:{
         custom_grey:'#F2F0F1',
+      },
+      screens:{
+        'xsm':'516px'
       }
     },
   },

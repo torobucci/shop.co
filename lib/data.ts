@@ -144,3 +144,4 @@ export async function getCartItemsCount(cart_id:number){
     const fetchedCount = await sql `SELECT COUNT(*) FROM shopco_shopping_cart_items WHERE cart_id=${cart_id}`
     return fetchedCount.rows[0].count
 }
+
