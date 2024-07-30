@@ -18,10 +18,10 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <StoreProvider>
-          <div>{children}</div>
+        <div>{children}</div>
         </StoreProvider>
 
-      </body>
+        </body>
     </html>
   );
 }

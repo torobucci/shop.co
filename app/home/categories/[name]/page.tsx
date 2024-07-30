@@ -10,13 +10,13 @@ export default async function Page({ params }: { params: { name: string } }) {
 
 
     return (
-        <div className="mx-12 pt-[74px] pb-28">
+        <div className="mx-4 xsm:mx-6 md:mx-8 lg:mx-12 pt-[74px] pb-28">
             <LinkHistory />
             <div className="flex">
                 <SideNav categories={categories} />
                 <div className="flex-[3] flex-col">
                     <CategoryHeader />
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-auto-fit-minmax gap-x-4 gap-y-6">
                         {products.map((product, index) => {
                             return <ProductItem index={index} category={params.name} name={product.name} id={product.id} price={product.price} imageUrl={product.image_url} /> // Corrected component name
                         })}

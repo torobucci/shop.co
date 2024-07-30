@@ -153,15 +153,29 @@ export async function decreaseQuantity(cart_item_id:number){
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', { email: formData.get('email'), password: formData.get('password'), redirectTo: '/home/categories/Men' })
+    const result: any = await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirectTo: '/home/categories/Men',
+    });
+
+    if (result?.error) {
+      return { error: result.error };
+    }
+
+    // Assuming you have access to the user data here
+    // Replace this with actual data returned by your authentication provider
+    const user = result.user;
+
+    return { user };
   }
   catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return 'Invalid credentials.';
+          return { error: 'Invalid credentials.' };
         default:
-          return 'Something went wrong.';
+          return { error: 'Something went wrong.' };
       }
     }
     throw error;

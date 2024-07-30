@@ -14,12 +14,17 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "imageBg":"url('../public/Rectangle 2.png')",
+        "smallImage":"url('../public/smallBg.svg')"
+      },
+      gridTemplateColumns: {
+        'auto-fit-minmax': 'repeat(auto-fit, minmax(300px, 1fr))',
       },
       colors:{
         custom_grey:'#F2F0F1',
       },
       screens:{
-        'xsm':'516px'
+        'xsm':'516px',
+        'xxsm':'375px'
       }
     },
   },

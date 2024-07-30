@@ -8,11 +8,31 @@ import {
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '../../lib/actions';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { setUser } from '../../lib/redux/features/UsersSlice';
 
 export default function LoginForm() {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    const result = await authenticate(undefined, formData);
+    console.log(result)
+
+    if (result?.error) {
+      setErrorMessage(result.error);
+    } else if (result?.user) {
+      console.log(result.user)
+      dispatch(setUser(result.user));
+    }
+  };
   return (
-    <form action={dispatch} className="space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`mb-3 text-2xl`}>
           Please log in to continue.

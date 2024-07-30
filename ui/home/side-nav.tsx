@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 export function SideNav({ categories }: { categories: Categories[] }) {
     const currentPath = usePathname().split('/')
     return (
-        <div className="flex-[0.55] mr-6 p-4 border-[1px] border-gray-300 text-black text-opacity-60 text-base rounded-md">
+        <div className="hidden lg:block flex-[0.55] mr-6 p-4 border-[1px] border-gray-300 text-black text-opacity-60 text-base rounded-md">
             <div className="flex justify-between items-center pb-3 border-b-[1px] border-gray-300 mb-3">
                 <h4 className="font-bold text-base text-black">Categories</h4>
                 <BiCategory />
