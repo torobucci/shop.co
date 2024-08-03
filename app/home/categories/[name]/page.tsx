@@ -19,13 +19,12 @@ export default async function Page({ params }: { params: { name: string } }) {
                     <div className="grid grid-cols-auto-fit-minmax gap-x-4 gap-y-6">
                         {products.map((product, index) => {
                             return <div key={index}>
-                                <ProductItem category={params.name} name={product.name} id={product.id} price={product.price} imageUrl={product.image_url} /> // Corrected component name
+                                <ProductItem category={params.name} name={product.name} id={product.id} price={product.price} imageUrl={product.image_url} />
                             </div>
                         })}
                     </div>
                 </div>
             </div>
-            {/* <Pagination/> */}
         </div>
     )
 }
