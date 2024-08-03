@@ -7,6 +7,7 @@ import type { User } from './lib/definitions';
 import bcrypt from 'bcrypt'
 
 
+
 async function getUser(email: string): Promise<User | undefined> {
   try {
     const user = await sql<User>`SELECT * FROM shopco_users WHERE email=${email}`;
@@ -16,6 +17,7 @@ async function getUser(email: string): Promise<User | undefined> {
     throw new Error('Failed to fetch user.');
   }
 }
+
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -29,6 +31,7 @@ export const { auth, signIn, signOut } = NextAuth({
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
           const user = await getUser(email);
+          //console.log(user)
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password_hash);
 
@@ -40,4 +43,20 @@ export const { auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      // If user object is present, this is a sign-in callback
+      if (user) {
+        token.id = (user as User).id.toString(); // Ensure id is a string
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Add user ID to session object
+      if (token) {
+        session.user.id = token.id as string; // Ensure id is a string
+      }
+      return session;
+    },
+  },
 });
