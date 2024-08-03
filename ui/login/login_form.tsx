@@ -15,6 +15,8 @@ import { setUser } from '../../lib/redux/features/UsersSlice';
 export default function LoginForm() {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
   const dispatch = useDispatch();
+  const [email,setEmail] = useState('john@gmail.com')
+  const [password,setPassword] = useState('123456')
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -52,7 +54,9 @@ export default function LoginForm() {
                 type="email"
                 name="email"
                 placeholder="Enter your email address"
+                onChange={(e)=>setEmail(e.target.value)}
                 required
+                value={email}
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
@@ -73,6 +77,8 @@ export default function LoginForm() {
                 placeholder="Enter password"
                 required
                 minLength={6}
+                onChange={(e)=>setPassword(e.target.value)}
+                value={password}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
