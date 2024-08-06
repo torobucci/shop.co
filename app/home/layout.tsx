@@ -4,6 +4,7 @@ import { fetchCategories, getCartItemsCount } from "../../lib/data";
 import { BottomNav } from "../../ui/bottom_nav";
 import { auth } from "../../auth";
 import { string } from "zod";
+import { SignOut } from "../../ui/signout";
 
 export default async function RootLayout({
     children,
@@ -20,7 +21,9 @@ export default async function RootLayout({
 
     return (
         <>
-            <NavBar session={session} categories={categories} cartCount={cartCount} />
+            <NavBar  session={session} categories={categories} cartCount={cartCount}>
+               <SignOut/>
+            </NavBar>
             <div>{children}</div>
             <BottomNav />
         </>

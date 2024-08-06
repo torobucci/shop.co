@@ -9,7 +9,7 @@ export function BottomNav() {
         <div className="px-4 xsm:px-6 md:px-8 lg:px-12 bg-custom_grey">
             <div className="relative w-full">
                 <div className="w-full mx-auto p-6 md:p-7 lg:p-10 absolute -top-14 bg-black rounded-xl flex flex-col gap-4 sm:flex-row md:justify-between">
-                    <p className="text-white uppercase font-extrabold text-2xl md:text-3xl lg:text-4xl max-w-[300px] lg:max-w-[400px]">Stay up to data about our latest offers</p>
+                    <p className="text-white uppercase font-extrabold text-2xl md:text-3xl lg:text-4xl max-w-[300px] lg:max-w-[400px]">Stay up to date about our latest offers</p>
                     <div className="flex flex-col gap-2">
                         <div className="flex max-w-[300px] lg:max-w-[400px] justify-center bg-white px-4 py-1.5 md:px-5 md:py-2.5 rounded-full items-center gap-3">
                             <TfiEmail className="text-sm xsm:text-base  md:text-lg text-slate-400" />
