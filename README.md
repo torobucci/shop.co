@@ -62,8 +62,8 @@ To get a local copy up and running, follow these steps.
 ### Prerequisites
 
 In order to run this project you need:
-- [] A web browser like Google Chrome.
-- [] A code editor like Visual Studio Code with Git and Node.js.
+- [ ] A web browser like Google Chrome.
+- [ ] A code editor like Visual Studio Code with Git and Node.js.
 
 You can check if Git is installed by running the following command in the terminal.
 ```
