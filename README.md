@@ -1,36 +1,168 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a name="readme-top"></a>
 
-## Getting Started
+<div align="center">
+  <h1><b>SHOP.CO 🏠️🛠️</b></h1>
+</div>
 
-First, run the development server:
+# 📗 Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  - [ SHOP.CO 🏠️](#shopco)
+  - [🛠 Built With ](#-built-with-)
+  - [Key Features ](#key-features)
+  - [🚀 Live Demo ](#-live-demo-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Install](#install)
+    - [Usage](#-usage-)
+  - [👥 Authors ](#-authors-)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
+
+
+# SHOP.CO 🏠️ <a name="shopco"></a>
+  
+  An e-commerce website specialized for clothing shops
+
+## <a name="-built-with-"> 🛠 Built With</a>
+  - Next14.js
+  - Next-Auth
+  - TailwindCSS
+  - TypeScript
+  - Firebase
+  - PostgreSQL
+
+## <a name="key-features"> Key features</a>
+  - Authentication
+  - Display of products
+  - Shopping Cart
+  - Create Products
+
+### 🚀 Live Demo <a name="live-demo"></a>
+ 
+ <a href="https://shop-co-sigma.vercel.app">SHOP.CO</a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### 🌟 Usage <a name="-usage-"></a>
+ - Boost your clothing sales by going online 
+ 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+
+To get a local copy up and running, follow these steps.
+
+### Prerequisites
+
+In order to run this project you need:
+- [ ] A web browser like Google Chrome.
+- [ ] A code editor like Visual Studio Code with Git and Node.js.
+
+You can check if Git is installed by running the following command in the terminal.
+```
+$ git --version
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Likewise for Node.js and npm for package installation.
+```
+$ node --version && npm --version
+```
+### Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Clone this repository using the GitHub link provided below.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### Install
 
-To learn more about Next.js, take a look at the following resources:
+In the terminal, go to your file directory and run this command.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+$ git clone https://github.com/torobucci/shop.co.git
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### To run the project, execute the following command:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### npm install
+
+to install all the dependencies used in the project
+
+### npm run dev
+
+in order to start next server and deploy the project locally
+
+### Run tests
+
+To run tests, run the following command:
+
+```
+$ npx next lint 
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## <a name="-authors-"> Author</a>
+
+
+👤 **Kevin Toro**
+- GitHub: [@torobucii](https://github.com/torobucci)
+- Twitter: [@torobucii](https://twitter.com/@torobucii)
+- LinkedIn: [Kevin Toro](https://www.linkedin.com/in/kevin-toroitich/)
+
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+## ⭐️ Show your support <a name="support"></a>
+
+
+Give a ⭐️ if you like this project!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+- Hats off to [Hamza Naeem](https://www.linkedin.com/in/hamzauix/) for a beautiful, efficient, and accessible user interface [Design](https://www.figma.com/design/22r4v1tqT0b1zFJnRn8FLi/E-commerce-Website-Template-(Freebie)-(Community)?node-id=52-4&t=g80jUo1bzzjI98Wk-0).
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- [ ]  Loading Next.js Features i.e Skeletons
+- [ ]  Add rating and reviews
+- [ ]  Add Sign Up feature
+- [ ]  Improve website performance
+- [ ]  Add dark mode feature
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](https://github.com/torobucci/shop.co/blob/master/MIT.txt) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
