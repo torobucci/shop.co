@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { AuthError } from 'next-auth';
 import { signIn } from '../auth';
+import bcrypt from 'bcrypt'
 
 const ProductFormSchema = z.object({
   product: z.string({
@@ -153,21 +154,12 @@ export async function decreaseQuantity(cart_item_id:number){
   formData: FormData,
 ) {
   try {
-    const result: any = await signIn('credentials', {
+     await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
       redirectTo: '/home/categories/Men',
     });
 
-    if (result?.error) {
-      return { error: result.error };
-    }
-
-    // Assuming you have access to the user data here
-    // Replace this with actual data returned by your authentication provider
-    const user = result.user;
-
-    return { user };
   }
   catch (error) {
     if (error instanceof AuthError) {
@@ -182,3 +174,17 @@ export async function decreaseQuantity(cart_item_id:number){
   }
 }
 
+export async function createUser(formData:FormData){
+   try{
+    const email:string =  formData.get('email')?.toString() ?? '';
+    const password:string = formData.get('password')?.toString() ?? ''
+    const username = email.split('@')[0]
+    const password_hash = await bcrypt.hash(password, 10);
+     await
+      sql`INSERT INTO shopco_users(username,email,password_hash)
+          VALUES(${username},${email}, ${password_hash})`
+   }
+   catch(error){
+    console.log(error)
+   }
+}
