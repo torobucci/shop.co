@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { setUser } from '../../lib/redux/features/UsersSlice';
 import { FcGoogle } from "react-icons/fc";
+import { createUser } from '../../lib/actions';
 
 export default function LoginForm() {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -23,14 +24,11 @@ export default function LoginForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const formData = new FormData(event.currentTarget);
     if (isLogin) {
-      const formData = new FormData(event.currentTarget);
-
-      const result = await authenticate(undefined, formData);
+      await authenticate(undefined, formData);
     }
-
-
-
+    await createUser(formData)
   };
   return (
     <form onSubmit={handleSubmit} className="w-full">
@@ -83,7 +81,7 @@ export default function LoginForm() {
             </div>
 
           </div>
-          {!isLogin &&
+          {/* {!isLogin &&
             <div className="mt-4">
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-gray-900"
@@ -103,7 +101,7 @@ export default function LoginForm() {
                 />
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
               </div>
-            </div>}
+            </div>} */}
         </div>
         {isLogin && <div className='my-2 flex justify-center'><a href='#' className='text-blue-600 active:text-purple-500'>Forgot Password ?</a></div>}
         <LoginButton isLogin={isLogin} />

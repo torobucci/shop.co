@@ -175,16 +175,27 @@ export async function decreaseQuantity(cart_item_id:number){
 }
 
 export async function createUser(formData:FormData){
-   try{
+
     const email:string =  formData.get('email')?.toString() ?? '';
     const password:string = formData.get('password')?.toString() ?? ''
     const username = email.split('@')[0]
+    console.log(username)
     const password_hash = await bcrypt.hash(password, 10);
-     await
-      sql`INSERT INTO shopco_users(username,email,password_hash)
-          VALUES(${username},${email}, ${password_hash})`
+   try{
+    await
+    sql`INSERT INTO shopco_users(username,email,password_hash)
+        VALUES(${username},${email}, ${password_hash})`
    }
    catch(error){
-    console.log(error)
+     console.log(error)
    }
+    await signIn('credentials', {
+      email,
+      password,
+      redirectTo: '/home/categories/Men',
+    });
+
+  //  catch(error){
+  //   console.log(error)
+  //  }
 }
