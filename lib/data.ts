@@ -11,13 +11,9 @@ export async function fetchCategories() {
 
         const data = await sql<Categories>`SELECT * FROM shopco_categories`;
 
-
         return data.rows;
     } catch (error) {
-        catch (error) {
             throw new Error(`Failed to fetch categories: ${error.message}`);
-          }
-
     }
 }
 
@@ -37,9 +33,9 @@ export async function fetchProductsByCategoryId(categoryName: string): Promise<P
     }
     catch (error) {
 
-        catch (error) {
+
             throw new Error(`Failed to fetch products by category name: ${error.message}`);
-          }
+
 
     }
 
@@ -58,9 +54,9 @@ export async function fetchProductByName(productId: number): Promise<SpecificPro
         return data.rows[0]
     }
     catch (error) {
-        catch (error) {
+
             throw new Error(`Failed to fetch specific product by name: ${error.message}`);
-          }
+
 
     }
 }
@@ -92,9 +88,9 @@ export async function addToCart(userId: number, productId: number, quantity: num
 
 
     } catch (err) {
-        catch (error) {
+
             throw new Error(`Failed to add product to cart: ${error.message}`);
-          }
+
 
     }
     revalidatePath('/home/cart')
@@ -117,9 +113,9 @@ export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCa
         return fetchedCartItems.rows
 
     } catch (error) {
-        catch (error) {
+
             throw new Error(`Failed to fetch shopping cart items: ${error.message}`);
-          }
+
 
         return Promise.resolve([]);
     }
