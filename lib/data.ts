@@ -13,7 +13,8 @@ export async function fetchCategories() {
 
         return data.rows;
     } catch (error) {
-            throw new Error(`Failed to fetch categories: ${error.message}`);
+        console.log('Failed to fetch categories',error)
+
     }
 }
 
@@ -33,8 +34,7 @@ export async function fetchProductsByCategoryId(categoryName: string): Promise<P
     }
     catch (error) {
 
-
-            throw new Error(`Failed to fetch products by category name: ${error.message}`);
+      console.log('Failed to fetch products by category name',error)
 
 
     }
@@ -54,8 +54,8 @@ export async function fetchProductByName(productId: number): Promise<SpecificPro
         return data.rows[0]
     }
     catch (error) {
+         console.log('Failed to fetch specific product by name',error)
 
-            throw new Error(`Failed to fetch specific product by name: ${error.message}`);
 
 
     }
@@ -88,8 +88,8 @@ export async function addToCart(userId: number, productId: number, quantity: num
 
 
     } catch (error) {
+            console.log('Failed to add product to cart',error)
 
-            throw new Error(`Failed to add product to cart: ${error.message}`);
 
 
     }
@@ -113,8 +113,8 @@ export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCa
         return fetchedCartItems.rows
 
     } catch (error) {
+           console.log('Failed to fetch shopping cart items',error)
 
-            throw new Error(`Failed to fetch shopping cart items: ${error.message}`);
 
 
         return Promise.resolve([]);
