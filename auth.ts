@@ -14,7 +14,10 @@ async function getUser(email: string): Promise<User | undefined> {
     return user.rows[0];
   } catch (error) {
 
-    throw new Error('Failed to fetch user.',error);
+    catch (error) {
+      throw new Error(`Failed to fetch user: ${error.message}`);
+    }
+
   }
 }
 

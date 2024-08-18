@@ -14,8 +14,10 @@ export async function fetchCategories() {
 
         return data.rows;
     } catch (error) {
+        catch (error) {
+            throw new Error(`Failed to fetch categories: ${error.message}`);
+          }
 
-        throw new Error('Failed to fetch categories.',error);
     }
 }
 
@@ -35,7 +37,10 @@ export async function fetchProductsByCategoryId(categoryName: string): Promise<P
     }
     catch (error) {
 
-        throw new Error('Failed to fetch products by category name.',error);
+        catch (error) {
+            throw new Error(`Failed to fetch products by category name: ${error.message}`);
+          }
+
     }
 
 }
@@ -53,7 +58,10 @@ export async function fetchProductByName(productId: number): Promise<SpecificPro
         return data.rows[0]
     }
     catch (error) {
-        throw new Error('Failed to fetch specific product by name.',error);
+        catch (error) {
+            throw new Error(`Failed to fetch specific product by name: ${error.message}`);
+          }
+
     }
 }
 
@@ -84,7 +92,10 @@ export async function addToCart(userId: number, productId: number, quantity: num
 
 
     } catch (err) {
-        throw new Error('Error adding product to cart:', err);
+        catch (error) {
+            throw new Error(`Failed to add product to cart: ${error.message}`);
+          }
+
     }
     revalidatePath('/home/cart')
     redirect('/home/cart')
@@ -106,7 +117,10 @@ export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCa
         return fetchedCartItems.rows
 
     } catch (error) {
-        throw new Error('Error failed fetching shopping cart items:', error);
+        catch (error) {
+            throw new Error(`Failed to fetch shopping cart items: ${error.message}`);
+          }
+
         return Promise.resolve([]);
     }
 
@@ -134,7 +148,10 @@ export async function fetchFilteredProducts(query: string) {
         `;
         return products.rows;
     } catch (error) {
-        throw new Error('Failed to fetch filtered products.',error);
+        catch (error) {
+            throw new Error(`Failed to fetch filteredProducts: ${error.message}`);
+          }
+
     }
 }
 export async function getCartItemsCount(user_id:number){
