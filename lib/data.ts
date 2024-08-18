@@ -87,7 +87,7 @@ export async function addToCart(userId: number, productId: number, quantity: num
         `;
 
 
-    } catch (err) {
+    } catch (error) {
 
             throw new Error(`Failed to add product to cart: ${error.message}`);
 
@@ -146,7 +146,7 @@ export async function fetchFilteredProducts(query: string) {
     } catch (error) {
 
             throw new Error(`Failed to fetch filteredProducts: ${error.message}`);
-          
+
 
     }
 }
