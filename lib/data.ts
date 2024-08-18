@@ -144,9 +144,9 @@ export async function fetchFilteredProducts(query: string) {
         `;
         return products.rows;
     } catch (error) {
-        catch (error) {
+
             throw new Error(`Failed to fetch filteredProducts: ${error.message}`);
-          }
+          
 
     }
 }
