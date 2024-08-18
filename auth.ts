@@ -13,8 +13,8 @@ async function getUser(email: string): Promise<User | undefined> {
     const user = await sql<User>`SELECT * FROM shopco_users WHERE email=${email}`;
     return user.rows[0];
   } catch (error) {
-    console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
+
+    throw new Error('Failed to fetch user.',error);
   }
 }
 
@@ -31,14 +31,13 @@ export const { auth, signIn, signOut } = NextAuth({
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
           const user = await getUser(email);
-          //console.log(user)
+
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password_hash);
 
           if (passwordsMatch) return user;
         }
-
-        console.log('Invalid credentials');
+         alert('Invalid credentials');
         return null;
       },
     }),

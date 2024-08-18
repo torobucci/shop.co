@@ -9,7 +9,7 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '../../lib/actions';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { setUser } from '../../lib/redux/features/UsersSlice';
 import { FcGoogle } from "react-icons/fc";
 import { createUser } from '../../lib/actions';
@@ -21,6 +21,17 @@ export default function LoginForm() {
   const [password, setPassword] = useState('123456')
   const [errorMessage, setErrorMessage] = useState('');
   const [isLogin, setIsLogin] = useState(true)
+
+  useEffect(()=>{
+      if(isLogin){
+        setEmail('john@gmail.com')
+        setPassword('123456')
+      }
+      else{
+        setEmail('')
+        setPassword('')
+      }
+  },[isLogin])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

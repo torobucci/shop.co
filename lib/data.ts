@@ -11,12 +11,11 @@ export async function fetchCategories() {
 
         const data = await sql<Categories>`SELECT * FROM shopco_categories`;
 
-        console.log('Data fetch completed after 3 seconds.');
 
         return data.rows;
     } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch categories.');
+
+        throw new Error('Failed to fetch categories.',error);
     }
 }
 
@@ -31,12 +30,12 @@ export async function fetchProductsByCategoryId(categoryName: string): Promise<P
      WHERE c.name = ${categoryName}
      AND i.is_primary = true;
      `
-        console.log('Data fetch completed after 3 seconds.');
+
         return data.rows
     }
     catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch products by category name.');
+
+        throw new Error('Failed to fetch products by category name.',error);
     }
 
 }
@@ -49,13 +48,12 @@ export async function fetchProductByName(productId: number): Promise<SpecificPro
         WHERE p.id = ${productId}
         GROUP BY p.id;`;
 
-        console.log('Data fetch completed after 3 seconds.');
+
 
         return data.rows[0]
     }
     catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch specific product by name.');
+        throw new Error('Failed to fetch specific product by name.',error);
     }
 }
 
@@ -83,10 +81,10 @@ export async function addToCart(userId: number, productId: number, quantity: num
             ON CONFLICT ON CONSTRAINT shopco_shopping_cart_items_pkey
             DO UPDATE SET quantity = shopco_shopping_cart_items.quantity + 1
         `;
-        console.log('Product added to cart successfully');
+
 
     } catch (err) {
-        console.error('Error adding product to cart:', err);
+        throw new Error('Error adding product to cart:', err);
     }
     revalidatePath('/home/cart')
     redirect('/home/cart')
@@ -108,7 +106,7 @@ export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCa
         return fetchedCartItems.rows
 
     } catch (error) {
-        console.error('Error failed fetching shopping cart items:', error);
+        throw new Error('Error failed fetching shopping cart items:', error);
         return Promise.resolve([]);
     }
 
@@ -136,12 +134,18 @@ export async function fetchFilteredProducts(query: string) {
         `;
         return products.rows;
     } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch invoices.');
+        throw new Error('Failed to fetch filtered products.',error);
     }
 }
-export async function getCartItemsCount(cart_id:number){
-    const fetchedCount = await sql `SELECT COUNT(*) FROM shopco_shopping_cart_items WHERE cart_id=${cart_id}`
+export async function getCartItemsCount(user_id:number){
+    const fetchedCount = await sql `SELECT COUNT(*)
+    FROM shopco_shopping_cart_items
+    WHERE cart_id = (
+        SELECT cart_id
+        FROM shopco_shopping_cart
+        WHERE user_id = ${user_id}
+    );
+    `
     return fetchedCount.rows[0].count
 }
 

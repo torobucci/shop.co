@@ -18,7 +18,7 @@ export default async function RootLayout({
     if(typeof userId === 'string'){
        cartCount = await getCartItemsCount(parseInt(userId))
     }
-
+    
     return (
         <>
             <NavBar  session={session} categories={categories} cartCount={cartCount}>
