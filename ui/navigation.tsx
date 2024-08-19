@@ -15,7 +15,7 @@ import { SignOut } from "./signout";
 
 
 
-export function NavBar({ session, categories, cartCount,children }: { session: any, categories: Categories[], cartCount: number, children:React.ReactNode }) {
+export function NavBar({ session, categories, cartCount,children }: { session: any, categories: Categories[] | undefined, cartCount: number, children:React.ReactNode }) {
 
     const [sideBarOpen, setSideBarOpen] = useState(false)
     const [currentCategory,setCurrentCategory] = useState('default')
@@ -38,7 +38,7 @@ export function NavBar({ session, categories, cartCount,children }: { session: a
                     <IoClose onClick={() => setSideBarOpen(!sideBarOpen)} className="text-xl cursor-pointer" />
                 </div>
                 <div>
-                    {categories.map((category, index) => {
+                    {categories?.map((category, index) => {
                         return (
                             <Link onClick={() => setSideBarOpen(!sideBarOpen)} href={`/home/categories/${category.name}`} className={`${currentPath[currentPath.length - 1] == category.name ? 'bg-slate-200' : ''} flex items-center p-2 mb-[2px] rounded-md justify-between hover:bg-slate-200 text-black text-opacity-60`} key={index}>
                                 <p>{category.name}</p>
@@ -55,13 +55,13 @@ export function NavBar({ session, categories, cartCount,children }: { session: a
                 </div>
                 <select value={pathname === '/home' ? 'default' : `${currentCategory}`} onChange={handleCategoryChange} className="text-base font-normal hidden lg:block focus:outline-none">
                     <option value="default" disabled>Select a category</option>
-                    {categories.map((category, index) => {
+                    {categories?.map((category, index) => {
                         return <option key={index}>{category.name}</option>
                     })}
                 </select>
                 <div className="items-center gap-1 hidden lg:flex">
                     <Link href="">OnSale</Link>
-                    <Link href="">New Arrivals</Link>   
+                    <Link href="">New Arrivals</Link>
                     <Link href="">Brands</Link>
                 </div>
                 <div className="flex xsm:flex-1 gap-3 items-center">

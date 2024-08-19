@@ -5,7 +5,7 @@ import createProduct from "../../lib/actions";
 import { Categories } from "../../lib/definitions";
 
 
-function ProductForm({categories}:{categories:Categories[]}) {
+function ProductForm({categories}:{categories:Categories[]|undefined}) {
     const initialState = { message: '', errors: {} };
     const [state, dispatch] = useFormState(createProduct, initialState);
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -86,7 +86,7 @@ function ProductForm({categories}:{categories:Categories[]}) {
                         <option value="" disabled>
                             Select a product's category
                         </option>
-                        {categories.map((category) => (
+                        {categories?.map((category) => (
                             <option key={category.id} value={category.id}>
                                 {category.name}
                             </option>

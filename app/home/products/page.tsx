@@ -12,7 +12,7 @@ export default async function Page({ searchParams }: { searchParams?: { query?: 
             <div className="flex gap-2">
                 <SideNav categories={categories}/>
                 <div className="grid flex-grow grid-cols-auto-fit-minmax gap-x-4 gap-y-6">
-                    {products.map((product, index) => {
+                    {products?.map((product, index) => {
                         return <div className="flex items-center flex-col gap-y-2 gap-x-1 justify-start" key={index}>
                             <img className="w-[295px] h-[298px] rounded-lg" src={product.image_url} alt="productImage" />
                             <Link href={`/home/categories/${product.category_name}/${product.id}`} className="font-semibold text-black text-base">{product.name}</Link>

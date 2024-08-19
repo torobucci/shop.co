@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { name: string } }) {
                 <div className="flex-[3] flex-col">
                     <CategoryHeader />
                     <div className="grid grid-cols-auto-fit-minmax gap-x-4 gap-y-6">
-                        {products.map((product, index) => {
+                        {products?.map((product, index) => {
                             return <div key={index}>
                                 <ProductItem category={params.name} name={product.name} id={product.id} price={product.price} imageUrl={product.image_url} />
                             </div>

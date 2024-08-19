@@ -18,7 +18,7 @@ export async function fetchCategories() {
     }
 }
 
-export async function fetchProductsByCategoryId(categoryName: string): Promise<Product[]> {
+export async function fetchProductsByCategoryId(categoryName: string) {
     noStore()
     try {
         const data = await sql<Product> `
@@ -40,7 +40,7 @@ export async function fetchProductsByCategoryId(categoryName: string): Promise<P
     }
 
 }
-export async function fetchProductByName(productId: number): Promise<SpecificProduct> {
+export async function fetchProductByName(productId: number) {
 
     noStore()
     try {
@@ -145,7 +145,7 @@ export async function fetchFilteredProducts(query: string) {
         return products.rows;
     } catch (error) {
 
-            throw new Error(`Failed to fetch filteredProducts: ${error.message}`);
+        console.log(error)
 
 
     }
