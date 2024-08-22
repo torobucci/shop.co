@@ -21,25 +21,35 @@ export default function LoginForm() {
   const [password, setPassword] = useState('123456')
   const [errorMessage, setErrorMessage] = useState('');
   const [isLogin, setIsLogin] = useState(true)
+  const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
-      if(isLogin){
-        setEmail('john@gmail.com')
-        setPassword('123456')
-      }
-      else{
-        setEmail('')
-        setPassword('')
-      }
-  },[isLogin])
+  useEffect(() => {
+    if (isLogin) {
+      setEmail('john@gmail.com')
+      setPassword('123456')
+    }
+    else {
+      setEmail('')
+      setPassword('')
+    }
+  }, [isLogin])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true)
     const formData = new FormData(event.currentTarget);
-    if (isLogin) {
-      await authenticate(undefined, formData);
+    try {
+      if (isLogin) {
+        await authenticate(undefined, formData);
+      } else {
+        await createUser(formData);
+      }
+    } catch (error) {
+      setErrorMessage('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
     }
-    await createUser(formData)
+
   };
   return (
     <form onSubmit={handleSubmit} className="w-full">
@@ -115,7 +125,7 @@ export default function LoginForm() {
             </div>} */}
         </div>
         {isLogin && <div className='my-2 flex justify-center'><a href='#' className='text-blue-600 active:text-purple-500'>Forgot Password ?</a></div>}
-        <LoginButton isLogin={isLogin} />
+        <LoginButton isLogin={isLogin} loading={loading} />
 
         <div className='my-2 flex justify-center'>{isLogin ? <p>Don't have an account? <span onClick={() => setIsLogin(!isLogin)} className='text-blue-600 cursor-pointer'>Sign Up</span></p> : <p>Already have an account? <span onClick={() => setIsLogin(!isLogin)} className='text-blue-600 cursor-pointer'>Login</span></p>}</div>
         <div className='flex items-center my-2'>
@@ -125,7 +135,7 @@ export default function LoginForm() {
         </div>
         <button className="relative w-full flex items-center bg-white p-2 rounded-lg shadow-md hover:bg-gray-100 transition border border-gray-300">
           <FcGoogle className="text-xl" />
-          <p className="absolute left-1/2 transform -translate-x-1/2 text-base font-medium text-gray-700">{isLogin? 'Log In':'Sign Up'} with Google</p>
+          <p className="absolute left-1/2 transform -translate-x-1/2 text-base font-medium text-gray-700">{isLogin ? 'Log In' : 'Sign Up'} with Google</p>
         </button>
 
 
@@ -146,11 +156,15 @@ export default function LoginForm() {
   );
 }
 
-function LoginButton({isLogin}:{isLogin:boolean}) {
+function LoginButton({ isLogin, loading }: { isLogin: boolean, loading: boolean }) {
   const { pending } = useFormStatus();
   return (
     <button className="mt-4 p-2 rounded-md w-full mx-auto bg-green-500 text-white md:text-xl flex gap-2 justify-center items-center" aria-disabled={pending}>
-      <p>{isLogin ? 'Log In': 'Sign Up'}</p> <ArrowRightIcon className="h-5 w-5" />
+      <p>{isLogin ? 'Log In' : 'Sign Up'}</p>
+      {loading ? (<svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+      </svg>) : (<ArrowRightIcon className="h-5 w-5" />)}
     </button>
   );
 }
