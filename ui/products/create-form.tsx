@@ -84,7 +84,7 @@ function ProductForm({categories}:{categories:Categories[]|undefined}) {
                         aria-describedby="category-error"
                     >
                         <option value="" disabled>
-                            Select a product's category
+                            Select a product&apos;s category
                         </option>
                         {categories?.map((category) => (
                             <option key={category.id} value={category.id}>

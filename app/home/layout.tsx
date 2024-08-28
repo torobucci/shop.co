@@ -5,6 +5,7 @@ import { BottomNav } from "../../ui/bottom_nav";
 import { auth } from "../../auth";
 import { string } from "zod";
 import { SignOut } from "../../ui/signout";
+import { handleSignOut } from "../../ui/home/side-nav";
 
 export default async function RootLayout({
     children,
@@ -18,11 +19,11 @@ export default async function RootLayout({
     if(typeof userId === 'string'){
        cartCount = await getCartItemsCount(parseInt(userId))
     }
-    
+
     return (
         <>
             <NavBar  session={session} categories={categories} cartCount={cartCount}>
-               <SignOut/>
+               <SignOut handleSignOut={handleSignOut}/>
             </NavBar>
             <div>{children}</div>
             <BottomNav />

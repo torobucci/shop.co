@@ -127,7 +127,7 @@ export default function LoginForm() {
         {isLogin && <div className='my-2 flex justify-center'><a href='#' className='text-blue-600 active:text-purple-500'>Forgot Password ?</a></div>}
         <LoginButton isLogin={isLogin} loading={loading} />
 
-        <div className='my-2 flex justify-center'>{isLogin ? <p>Don't have an account? <span onClick={() => setIsLogin(!isLogin)} className='text-blue-600 cursor-pointer'>Sign Up</span></p> : <p>Already have an account? <span onClick={() => setIsLogin(!isLogin)} className='text-blue-600 cursor-pointer'>Login</span></p>}</div>
+        <div className='my-2 flex justify-center'>{isLogin ? <p>Don&apos;t have an account? <span onClick={() => setIsLogin(!isLogin)} className='text-blue-600 cursor-pointer'>Sign Up</span></p> : <p>Already have an account? <span onClick={() => setIsLogin(!isLogin)} className='text-blue-600 cursor-pointer'>Login</span></p>}</div>
         <div className='flex items-center my-2'>
           <div className='flex-1 border-[0.5px] border-gray-200'></div>
           <p className='mx-2'>Or</p>

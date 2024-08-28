@@ -12,7 +12,7 @@ export default function ShoppingCartItems({ shoppingCartItems }: { shoppingCartI
       cost += el.price * el.quantity
     })
     setTotalCost(cost)
-  })
+  },[shoppingCartItems])
   return (
 
     <div className="flex flex-col md:flex-row gap-10 mb-4">
