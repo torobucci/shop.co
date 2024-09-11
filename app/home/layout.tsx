@@ -6,6 +6,7 @@ import { auth } from "../../auth";
 import { string } from "zod";
 import { SignOut } from "../../ui/signout";
 import { handleSignOut } from "../../ui/home/side-nav";
+import { SessionContext } from "../../ui/SessionContext";
 
 export default async function RootLayout({
     children,
@@ -21,12 +22,12 @@ export default async function RootLayout({
     }
 
     return (
-        <>
-            <NavBar  session={session} categories={categories} cartCount={cartCount}>
+        <SessionContext session={session}>
+            <NavBar categories={categories} cartCount={cartCount}>
                <SignOut handleSignOut={handleSignOut}/>
             </NavBar>
             <div>{children}</div>
             <BottomNav />
-        </>
+        </SessionContext>
     );
 }

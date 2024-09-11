@@ -11,12 +11,13 @@ import { FaAngleRight } from "react-icons/fa6";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { SignOut } from "./signout";
+import { useContext } from "react";
+import { sessionContext } from "./SessionContext";
 
 
 
-
-export function NavBar({ session, categories, cartCount,children }: { session: any, categories: Categories[] | undefined, cartCount: number, children:React.ReactNode }) {
-
+export function NavBar({  categories, cartCount,children }: {  categories: Categories[] | undefined, cartCount: number, children:React.ReactNode }) {
+    const session = useContext(sessionContext)
     const [sideBarOpen, setSideBarOpen] = useState(false)
     const [currentCategory,setCurrentCategory] = useState('default')
     const pathname = usePathname()
@@ -71,9 +72,9 @@ export function NavBar({ session, categories, cartCount,children }: { session: a
                             <FiShoppingCart className="text-[21px]" />
                             {cartCount > 0 && <div className="bg-red-600 text-white rounded-full px-[5px] py-[1px]  text-[11px] absolute -top-[9px] -right-[9px]">{cartCount}</div>}
                         </div></Link>
-                    {session?.user?.id ?
+                    {session?
                         <div className="flex gap-[3px] items-center">
-                            <p>{session.user.email.split('@')[0]}</p>
+                            <p>{session?.user?.email?.split('@')[0]}</p>
                             <FaRegUserCircle />
                         </div> :
 
