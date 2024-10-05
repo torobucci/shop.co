@@ -17,7 +17,7 @@ import { sessionContext } from "./SessionContext";
 
 
 export function NavBar({  categories, cartCount,children }: {  categories: Categories[] | undefined, cartCount: number, children:React.ReactNode }) {
-    const session = useContext(sessionContext)
+    const session = useContext<{ user: { email: string } }>(sessionContext)
     const [sideBarOpen, setSideBarOpen] = useState(false)
     const [currentCategory,setCurrentCategory] = useState('default')
     const pathname = usePathname()
