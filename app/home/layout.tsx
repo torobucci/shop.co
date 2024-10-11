@@ -17,7 +17,7 @@ export default async function RootLayout({
     const userId = session?.user?.id
     const categories = await fetchCategories()
     let cartCount = 0
-    if(typeof userId === 'string'){
+    if(typeof userId === 'string '){
        cartCount = await getCartItemsCount(parseInt(userId))
     }
 
