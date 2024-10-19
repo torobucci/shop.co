@@ -21,7 +21,7 @@ export default function ProductItem({
     <div className="flex items-center flex-col gap-y-2 gap-x-1 justify-start">
       {loading && <Skeleton width={295} height={298} />}
       <img
-        className={`${loading ? "hidden" : "w-[295px] h-[298px] rounded-lg"}`}
+        className={loading ? "hidden" : "w-[295px] h-[298px] rounded-lg"}
         src={imageUrl}
         onLoad={() => setLoading(false)}
         alt="productImage"

@@ -1,6 +1,6 @@
 import { SideNav } from "../../../../ui/home/side-nav"
 import { fetchCategories, fetchProductsByCategoryId } from "../../../../lib/data"
-import ProductItem from "../../../../ui/products/procuct-item"
+import ProductItem from "../../../../ui/products/product-item"
 import LinkHistory from "../../../../ui/home/nav-links"
 import CategoryHeader from "../../../../ui/home/category-header"
 
