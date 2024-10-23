@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { fetchCategories } from "../lib/data"
+
 
 
 export default async function Page() {
-  const categories = await fetchCategories()
+  
 
   return (
     <div className="flex justify-start items-center bg-imageBg" >
@@ -12,7 +12,7 @@ export default async function Page() {
         <h2 className="font-extrabold text-[60px] max-w-[560px] uppercase leading-[64px]">find clothes that matches your style</h2>
         <p className="opacity-[0.6] text-lg max-w-[615px]">Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>
         <Link
-          href={`/home/${categories?categories[0].name:''}`}
+          href={`/products`}
           className="max-w-[200px] text-center rounded-full px-6 py-3 uppercase bg-black text-white"
         >
           shop now

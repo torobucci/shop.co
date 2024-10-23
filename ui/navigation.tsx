@@ -67,7 +67,7 @@ export function NavBar({  categories, cartCount,children }: {  categories: Categ
                 </div>
                 <div className="flex xsm:flex-1 gap-3 items-center">
                     <Search placeholder="Search for products" />
-                    <Link href="/home/cart">
+                    <Link href="/cart">
                         <div className="relative">
                             <FiShoppingCart className="text-[21px]" />
                             {cartCount > 0 && <div className="bg-red-600 text-white rounded-full px-[5px] py-[1px]  text-[11px] absolute -top-[9px] -right-[9px]">{cartCount}</div>}

@@ -1,8 +1,8 @@
-import { fetchShoppingCartItems } from "../../../lib/data"
-import ShoppingCartItems from "../../../ui/cart/shopping_cart_items"
-import LinkHistory from "../../../ui/home/nav-links"
-import { auth } from "../../../auth"
-import { ShoppingCartItem } from "../../../lib/definitions"
+import { fetchShoppingCartItems } from "../../lib/data"
+import ShoppingCartItems from "../../ui/cart/shopping_cart_items"
+import LinkHistory from "../../ui/home/nav-links"
+import { auth } from "../../auth"
+import { ShoppingCartItem } from "../../lib/definitions"
 export default async function Page(){
   const session  = await auth()
     const userId = session?.user?.id
