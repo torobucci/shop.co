@@ -32,7 +32,7 @@ export function NavBar({  categories, cartCount,children }: {  categories: Categ
     };
 
     return (
-        <div className={`px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-10 w-full bg-white py-4 ${notAtHome ? 'pb-0' : ''}`}>
+        <div className={`px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-20 w-full bg-white py-4 ${notAtHome ? 'pb-0' : ''}`}>
             <div className={`px-4 xsm:px-6 md:px-8 lg:px-12 py-7 border-r border-slate-300 rounded-tr-lg rounded-br-lg absolute bg-white flex flex-col top-0 h-screen z-20 transition-all duration-300 ease-in-out ${sideBarOpen ? 'translate-x-0 w-2/3 left-0' : 'translate-x-full w-0 -left-full'}`}>
                 <div className="flex justify-between items-center pb-3 border-b-[1px] border-gray-300 mb-3">
                     <h4 className="font-bold text-xl text-black">Categories</h4>
