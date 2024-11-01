@@ -1,8 +1,8 @@
-import LinkHistory from "../../ui/home/nav-links";
+import LinkHistory from "../../../ui/home/nav-links";
 import Link from "next/link";
-import { fetchCategories, fetchFilteredProducts } from "../../lib/data";
-import { SideNav } from "../../ui/home/side-nav";
-import ProductItem from "../../ui/products/product-item";
+import { fetchCategories, fetchFilteredProducts } from "../../../lib/data";
+import { SideNav } from "../../../ui/home/side-nav";
+import ProductItem from "../../../ui/products/product-item";
 export default async function Page({
   searchParams,
 }: {

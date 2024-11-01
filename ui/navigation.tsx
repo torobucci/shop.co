@@ -31,13 +31,6 @@ export function NavBar({
   const currentPath = usePathname().split("/");
   const router = useRouter();
 
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedCategory = event.target.value;
-    setCurrentCategory(selectedCategory);
-    router.push(`/home/categories/${selectedCategory}`);
-  };
 
   return (
     <div
@@ -94,19 +87,7 @@ export function NavBar({
               SHOP.C0
             </Link>
           </div>
-          <select
-            value={pathname === "/home" ? "default" : `${currentCategory}`}
-            onChange={handleCategoryChange}
-            className="text-base font-normal hidden lg:block focus:outline-none"
-          >
-            <option value="default" disabled>
-              Select a category
-            </option>
-            {categories?.map((category, index) => {
-              return <option key={index}>{category.name}</option>;
-            })}
-          </select>
-          <div className="items-center gap-1 hidden lg:flex">
+          <div className="items-center gap-2 hidden lg:flex">
             <Link href="">OnSale</Link>
             <Link href="">New Arrivals</Link>
             <Link href="">Brands</Link>

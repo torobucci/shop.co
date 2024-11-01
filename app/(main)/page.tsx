@@ -1,16 +1,12 @@
 import Link from "next/link";
-import HeroText from "../ui/hero_text";
+import HeroText from "../../ui/hero_text";
 
 export default async function Page() {
   return (
     <div className="relative flex justify-start items-center bg-imageBg bg-cover bg-center">
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
       <div className="px-2 md:px-12 w-full flex flex-col gap-4 pt-28 pb-32 z-10">
-        {/* <h2 className="font-extrabold text-[60px] max-w-[560px] uppercase leading-[64px]">
-          find clothes that matches your style
-        </h2> */}
         <HeroText />
-
         <p className="text-lg md:text-xl opacity-70 max-w-[615px] mt-3 mb-8">
           Browse through our diverse range of meticulously crafted garments,
           designed to bring out your individuality and cater to your sense of
