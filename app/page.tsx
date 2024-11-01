@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeroText from "../ui/hero_text";
 
 export default async function Page() {
   return (
@@ -8,9 +9,7 @@ export default async function Page() {
         {/* <h2 className="font-extrabold text-[60px] max-w-[560px] uppercase leading-[64px]">
           find clothes that matches your style
         </h2> */}
-        <h2 className="font-extrabold text-[45px] md:text-[50px] lg:text-[60px] uppercase leading-none tracking-tight max-w-[560px]">
-          Find Clothes That Match Your Style
-        </h2>
+        <HeroText />
 
         <p className="text-lg md:text-xl opacity-70 max-w-[615px] mt-3 mb-8">
           Browse through our diverse range of meticulously crafted garments,
