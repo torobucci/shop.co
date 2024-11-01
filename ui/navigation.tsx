@@ -6,11 +6,9 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { IoMenu } from "react-icons/io5";
-import { useRouter } from "next/navigation";
 import { FaAngleRight } from "react-icons/fa6";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { SignOut } from "./signout";
 import { useContext } from "react";
 import { sessionContext } from "./SessionContext";
 
@@ -25,18 +23,15 @@ export function NavBar({
 }) {
   const session = useContext<{ user: { email: string } }>(sessionContext);
   const [sideBarOpen, setSideBarOpen] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState("default");
   const pathname = usePathname();
-  const notAtHome = pathname.length > 5;
+ 
   const currentPath = usePathname().split("/");
-  const router = useRouter();
+  
 
 
   return (
     <div
-      className={`px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-20 w-full bg-white py-4 ${
-        notAtHome ? "pb-0" : ""
-      }`}
+      className={`px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-20 w-full bg-white py-4 `}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent pointer-events-none"></div>
       <div className="">
@@ -119,7 +114,7 @@ export function NavBar({
             )}
           </div>
         </div>
-        {notAtHome && <div className="mt-4 border-b border-slate-300"></div>}
+    
       </div>
     </div>
   );
