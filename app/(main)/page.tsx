@@ -1,5 +1,5 @@
 import Link from "next/link";
-import HeroText from "../../ui/hero_text";
+import HeroText from "@ui/hero_text";
 
 export default async function Page() {
   return (

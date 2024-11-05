@@ -1,10 +1,10 @@
-import { NavBar } from "../../ui/navigation";
-import { fetchCategories, getCartItemsCount } from "../../lib/data";
-import { BottomNav } from "../../ui/bottom_nav";
+import { NavBar } from "@ui/navigation";
+import { fetchCategories, getCartItemsCount } from "@lib/data";
+import { BottomNav } from "@ui/bottom_nav";
 import { auth } from "../../auth";
-import { SignOut } from "../../ui/signout";
-import { handleSignOut } from "../../ui/home/side-nav";
-import { SessionContext } from "../../ui/SessionContext";
+import { SignOut } from "@ui/signout";
+import { handleSignOut } from "@ui/home/side-nav";
+import { SessionContext } from "@ui/SessionContext";
 
 
 export default async function RootLayout({

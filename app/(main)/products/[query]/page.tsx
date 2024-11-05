@@ -1,6 +1,6 @@
-import LinkHistory from "../../../ui/home/nav-links";
+import LinkHistory from "@ui/home/nav-links";
 import Link from "next/link";
-import { fetchFilteredProducts } from "../../../lib/data";
+import { fetchFilteredProducts } from "@lib/data";
 export default async function Page({ searchParams }: { searchParams?: { query?: string } }) {
     const query = searchParams?.query || ''
     const products = await fetchFilteredProducts(query)
