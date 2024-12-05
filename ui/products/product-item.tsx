@@ -27,7 +27,7 @@ export default function ProductItem({
         alt="productImage"
       />
       <Link
-        href={`/home/categories/${category}/${id}`}
+        href={`/${id}`}
         className="font-semibold text-black text-base"
       >
         {name}

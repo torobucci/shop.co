@@ -93,8 +93,8 @@ export async function addToCart(userId: number, productId: number, quantity: num
 
 
     }
-    revalidatePath('/home/cart')
-    redirect('/home/cart')
+    revalidatePath('/cart')
+    redirect('/cart')
 
 }
 export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCartItem[]> {

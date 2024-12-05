@@ -2,9 +2,9 @@ import LinkHistory from "@ui/home/nav-links"
 import { fetchProductByName } from "@lib/data"
 import ProductDetails from "@ui/home/product-details"
 import { auth } from "../../../auth"
-import { Session } from "inspector"
-export default async function page({ params }: { params:{productname: number} }) {
-   const productId = params.productname
+export default async function page({ params }: { params:{product_id: string} }) {
+   
+   const productId = parseInt(params.product_id)
     const product = await fetchProductByName(productId)
     const session  = await auth()
 
