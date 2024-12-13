@@ -1,5 +1,5 @@
-import ProductForm from "../../../../ui/products/create-form";
-import { fetchCategories } from "../../../../lib/data";
+import ProductForm from "@ui/products/create-form";
+import { fetchCategories } from "@lib/data";
 
 async function Page(){
     const categories = await fetchCategories()

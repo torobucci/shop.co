@@ -40,13 +40,13 @@ export async function fetchProductsByCategoryId(categoryName: string) {
     }
 
 }
-export async function fetchProductByName(productId: number) {
-
+export async function fetchProductByName(productName: string) {
+    
     noStore()
     try {
         const data = await sql<SpecificProduct> `SELECT p.id, p.name, p.description, p.price, array_agg(i.image_url) AS productimages
         FROM shopco_products p INNER JOIN shopco_productimages i ON p.id = i.product_id
-        WHERE p.id = ${productId}
+        WHERE p.name = ${productName}
         GROUP BY p.id;`;
 
 
@@ -93,8 +93,8 @@ export async function addToCart(userId: number, productId: number, quantity: num
 
 
     }
-    revalidatePath('/home/cart')
-    redirect('/home/cart')
+    revalidatePath('/cart')
+    redirect('/cart')
 
 }
 export async function fetchShoppingCartItems(userId: number): Promise<ShoppingCartItem[]> {

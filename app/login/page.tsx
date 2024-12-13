@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import LoginForm from '../../ui/login/login_form';
+import LoginForm from '@ui/login/login_form';
 
 const metadata:Metadata ={
   title:'login'

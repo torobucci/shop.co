@@ -22,7 +22,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
       params.delete('query');
     }
     replace(`${pathname}?${params.toString()}`);
-    router.push(`/home/products/?${params ? params.toString() : ''}`)
+    router.push(`/products/?${params ? params.toString() : ''}`)
   }, 300)
   return (
     <div className="xsm:w-full block xsm:flex items-center lg:flex-1 xsm:bg-gray-100 xsm:rounded-2xl xsm:py-[9px] xsm:px-4">
