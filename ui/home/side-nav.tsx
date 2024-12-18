@@ -17,7 +17,7 @@ export async function SideNav({ categories }: { categories: Categories[] | undef
         <div className="hidden lg:flex lg:max-w-[250px] flex-col justify-between flex-[0.55] mr-6 p-4 border-[1px] border-gray-300 text-black text-opacity-60 text-base rounded-md min-w-[250px] h-screen overflow-y-auto">
             <div>
                 <div className="flex justify-between items-center pb-3 border-b-[1px] border-gray-300 mb-3">
-                    <h4 className="font-bold text-base text-black">Categories</h4>
+                    <h4 className="font-bold text-base text-black">Filters</h4>
                     <BiCategory />
                 </div>
                 <SideNavLinks categories={categories} />
