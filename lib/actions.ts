@@ -87,8 +87,7 @@ async function createProduct(prevState: State, formData: FormData) {
     };
   }
   revalidatePath('/products')
-  revalidatePath(`/home/${categoryName}`)
-  redirect(`/home/${categoryName}`)
+  redirect(`/products`)
 
 }
 
@@ -101,7 +100,7 @@ export async function increaseQuantity(cart_item_id:number){
   SET quantity = quantity + 1
   WHERE cart_item_id = ${cart_item_id}`
 
-    revalidatePath('/home/cart')
+    revalidatePath('/cart')
  }
  catch(error){
   console.log('failed to increase quantity of product',error)
@@ -114,7 +113,7 @@ export async function decreaseQuantity(cart_item_id:number){
    UPDATE shopco_shopping_cart_items
    SET quantity = quantity - 1
    WHERE cart_item_id = ${cart_item_id} AND cart_item_id > 0`
-   revalidatePath('/home/cart')
+   revalidatePath('/cart')
   }
   catch(error){
    console.log('failed to increase quantity of product',error)
@@ -126,7 +125,7 @@ export async function decreaseQuantity(cart_item_id:number){
    await sql `
    DELETE FROM shopco_shopping_cart_items
    WHERE cart_item_id = ${cart_item_id}`
-   revalidatePath('/home/cart')
+   revalidatePath('/cart')
   }
   catch(error){
    console.log('failed to increase quantity of product',error)
@@ -141,7 +140,7 @@ export async function decreaseQuantity(cart_item_id:number){
      await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
-      redirectTo: '/home/categories/Men',
+      redirectTo: '/products',
     });
 
   }
@@ -176,7 +175,7 @@ export async function createUser(formData:FormData){
     await signIn('credentials', {
       email,
       password,
-      redirectTo: '/home/categories/Men',
+      redirectTo: '/products',
     });
 
   //  catch(error){
