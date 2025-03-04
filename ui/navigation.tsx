@@ -83,9 +83,9 @@ export function NavBar({
             </Link>
           </div>
           <div className="items-center gap-2 hidden lg:flex">
-            <Link href="">OnSale</Link>
-            <Link href="">New Arrivals</Link>
-            <Link href="">Brands</Link>
+            <Link href="/products">OnSale</Link>
+            <Link href="/products">New Arrivals</Link>
+            <Link href="/products">Brands</Link>
           </div>
           <div className="flex xsm:flex-1 gap-3 items-center">
             <Search placeholder="Search for products"/>
