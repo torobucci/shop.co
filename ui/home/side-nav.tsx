@@ -21,6 +21,7 @@ export async function SideNav({ categories }: { categories: Categories[] | undef
                     <BiCategory />
                 </div>
                 <SideNavLinks categories={categories} />
+                <button className="">Apply filters</button>
             </div>
             {session && <SignOut handleSignOut={handleSignOut} />}
         </div>
