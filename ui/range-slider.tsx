@@ -7,11 +7,12 @@ function valuetext(value: number) {
   return `$${value}`;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider({ setPrice }: { setPrice: React.Dispatch<React.SetStateAction<number[]>> }) {
   const [value, setValue] = React.useState<number[]>([10, 1000]);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
+    setPrice(newValue as number[]);
   };
 
   return (
