@@ -162,7 +162,7 @@ export async function getCartItemsCount(user_id:number){
     return fetchedCount.rows[0].count
 }
 
-export async function ApplyFilters(
+export async function applyFilters(
     priceRange?: number[], 
     category?: string
   ) {
@@ -185,7 +185,7 @@ export async function ApplyFilters(
         ? `WHERE ${queryConditions.join(' AND ')}` 
         : '';
       
-      const products = await sql`
+      const products = await sql<FilteredProduct>`
         SELECT
           p.id,
           p.name,
