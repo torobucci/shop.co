@@ -1,34 +1,30 @@
 'use client'
 import { useEffect, useState } from "react";
 import LinkHistory from "@ui/home/nav-links";
-import { fetchCategories, fetchFilteredProducts } from "@lib/data";
+import { fetchFilteredProducts } from "@lib/data";
 import { SideNav } from "@ui/home/side-nav";
 import ProductItem from "./product-item";
-import { Categories, FilteredProduct } from "@lib/definitions";
-export function ProductList({searchParams}:{searchParams?: { query?: string }}){
+import { Categories, FilteredProduct, Product } from "@lib/definitions";
+export function ProductList({searchParams,initialProducts, categories}:{searchParams?: { query?: string }, initialProducts:FilteredProduct[]|undefined, categories:Categories[]| undefined}) {
  
-    const [products, setProducts] = useState<FilteredProduct[] | undefined>([]); // Store products here
-    const [categories, setCategories] = useState<Categories[] | undefined>([]);
+    const [products, setProducts] = useState<FilteredProduct[] | undefined>(initialProducts); // Store products here
+   
     const query = searchParams?.query || ""; // Get search query from URL
   
     // Fetch categories on mount
-    useEffect(() => {
-      const loadCategories = async () => {
-        const allCategories = await fetchCategories();
-        setCategories(allCategories);
-      };
-      loadCategories();
-    }, []);
-  
+    console.log
     // Fetch products based on search query (when query changes)
     useEffect(() => {
-      const fetchProducts = async () => {
-        if (query) {
-          const searchResults = await fetchFilteredProducts(query);
-          setProducts(searchResults);
-        }
-      };
-      fetchProducts();
+      if (query) {
+        // Use the server function directly with promises
+        fetchFilteredProducts(query)
+          .then(searchResults => {
+            setProducts(searchResults);
+          })
+          .catch(error => {
+            console.error("Error fetching products:", error);
+          });
+      }
     }, [query]); // Runs only when search query changes
   
     // Function to apply filters (separate from search)
@@ -56,4 +52,4 @@ export function ProductList({searchParams}:{searchParams?: { query?: string }}){
         </div>
       </div>
     );
-}
+} 

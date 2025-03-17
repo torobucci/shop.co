@@ -1,7 +1,7 @@
 'use client'
 import { PowerIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-export function SignOut({ handleSignOut }: { handleSignOut: () => Promise<null> }) {
+export function SignOut({ handleSignOut }: { handleSignOut: () => Promise<void>}) {
     const [loading, setLoading] = useState(false)
 
     const handleFormSubmit = async () => {
