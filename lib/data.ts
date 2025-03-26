@@ -162,50 +162,52 @@ export async function getCartItemsCount(user_id:number){
     return fetchedCount.rows[0].count
 }
 
-export async function applyFilters(
-    priceRange?: number[], 
-    category?: string
-  ) {
-    try {
-      // Start building the query
-      let queryConditions = [];
-      
-      // Add price range condition if provided
-      if (priceRange && priceRange.length === 2) {
-        queryConditions.push(`p.price >= ${priceRange[0]} AND p.price <= ${priceRange[1]}`);
-      }
-      
-      // Add category condition if provided
-      if (category && category !== 'All') {
-        queryConditions.push(`c.name = '${category}'`);
-      }
-      
-      // Build the WHERE clause
-      const whereClause = queryConditions.length > 0 
-        ? `WHERE ${queryConditions.join(' AND ')}` 
-        : '';
-      
-      const products = await sql<FilteredProduct>`
-        SELECT
-          p.id,
-          p.name,
-          p.description,
-          p.price,
-          p.stock_quantity,
-          c.name as category_name,
-          i.image_url
-        FROM shopco_products p
-        JOIN shopco_categories c ON p.category_id = c.id
-        JOIN shopco_productimages i ON p.id = i.product_id AND i.is_primary = true
-        ${whereClause}
-      `;
 
-      revalidatePath('/products')
-      
-      return products.rows;
-    
-    } catch (error) {
-      console.error("Error filtering products:", error);
-      throw new Error("Failed to filter products");
+export async function applyFilters(priceRange?: number[], category?: string) {
+  try {
+    let queryConditions = [];
+    let queryParams: any[] = [];
+
+    // Add price range condition if provided
+    if (priceRange && priceRange.length === 2) {
+      queryConditions.push(`p.price BETWEEN $${queryParams.length + 1} AND $${queryParams.length + 2}`);
+      queryParams.push(priceRange[0], priceRange[1]);
     }
+
+    // Add category condition if provided
+    if (category && category !== "All") {
+      queryConditions.push(`c.name = $${queryParams.length + 1}`);
+      queryParams.push(category);
+    }
+
+    // Build the WHERE clause
+    const whereClause = queryConditions.length > 0 ? `WHERE ${queryConditions.join(" AND ")}` : "";
+
+    // Construct the query safely
+    const query = `
+      SELECT
+        p.id,
+        p.name,
+        p.description,
+        p.price,
+        p.stock_quantity,
+        c.name as category_name,
+        i.image_url
+      FROM shopco_products p
+      JOIN shopco_categories c ON p.category_id = c.id
+      JOIN shopco_productimages i ON p.id = i.product_id AND i.is_primary = true
+      ${whereClause}
+    `;
+
+    // Execute query with parameters
+    const products = await sql<FilteredProduct>(query, queryParams);
+
+    // Revalidate cache
+    revalidatePath("/products");
+
+    return products.rows;
+  } catch (error) {
+    console.error("Error filtering products:", error);
+    throw new Error("Failed to filter products");
   }
+}

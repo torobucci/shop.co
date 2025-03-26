@@ -11,10 +11,20 @@ import * as React from "react";
 export default function FilterFeature({ categories, setProducts }: { categories: Categories[] | undefined, setProducts: React.Dispatch<React.SetStateAction<FilteredProduct[] | undefined>> }) {
     const [category, setCategory] = React.useState<string>('')
     const [price, setPrice] = React.useState<number[]>([5, 1000])
-    const handleApplyFilters = async () => {
-        const filteredProducts = await applyFilters(price,category)
-        setProducts(filteredProducts)
+
+    
+    const handleClick = async () => {
+      const newProducts = await applyFilters(price, category);
+      setProducts(newProducts);
     }
+    // React.useEffect(() => {
+    //   const fetchFilteredProducts = async () => {
+    //   const newProducts = await applyFilters(price, category);
+    //   setProducts(newProducts);
+    //   };
+    //   fetchFilteredProducts();
+    // }, [price, category]);
+
     return (
     <div>
       <div className="flex justify-between items-center pb-3 border-b-[1px] border-gray-300 mb-3">
@@ -27,7 +37,7 @@ export default function FilterFeature({ categories, setProducts }: { categories:
         <FaAngleDown />
       </div>
       <RangeSlider setPrice={setPrice}/>
-      <button onClick={handleApplyFilters} className="w-full text-white bg-black rounded-3xl py-2 px-4 text-center mt-3">
+      <button  className="w-full text-white bg-black rounded-3xl py-2 px-4 text-center mt-3" onClick={handleClick}>
         Apply filters
       </button>
     </div>

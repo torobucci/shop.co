@@ -9,25 +9,7 @@ export function ProductList({searchParams,initialProducts, categories}:{searchPa
  
     const [products, setProducts] = useState<FilteredProduct[] | undefined>(initialProducts); // Store products here
    
-    const query = searchParams?.query || ""; // Get search query from URL
-  
-    // Fetch categories on mount
-    console.log
-    // Fetch products based on search query (when query changes)
-    useEffect(() => {
-      if (query) {
-        // Use the server function directly with promises
-        fetchFilteredProducts(query)
-          .then(searchResults => {
-            setProducts(searchResults);
-          })
-          .catch(error => {
-            console.error("Error fetching products:", error);
-          });
-      }
-    }, [query]); // Runs only when search query changes
-  
-    // Function to apply filters (separate from search)
+    
     
     return (
       <div className="mx-4 xsm:mx-6 md:mx-8 lg:mx-12 pt-[74px] pb-28">

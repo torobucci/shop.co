@@ -12,10 +12,7 @@ export default async function Page({
   const categories = await fetchCategories();
   
   // Only fetch products if there's a query
-  let initialProducts: FilteredProduct[] | undefined = [];
-  if (query) {
-    initialProducts = await fetchFilteredProducts(query);
-  }
+  const initialProducts = await fetchFilteredProducts(query);
  
   return <ProductList 
     searchParams={searchParams}
