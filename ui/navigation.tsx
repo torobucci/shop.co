@@ -24,89 +24,148 @@ export function NavBar({
   const session = useContext<{ user: { email: string } }>(sessionContext);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const pathname = usePathname();
- 
   const currentPath = usePathname().split("/");
-  
-
 
   return (
-    <div
-      className={`px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-20 w-full bg-white py-4 `}
-    >
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent pointer-events-none"></div>
-      <div className="">
+    <>
+      {/* Backdrop overlay */}
+      {sideBarOpen && (
         <div
-          className={`px-4 xsm:px-6 md:px-8 lg:px-12 py-7 border-r border-slate-300 rounded-tr-lg rounded-br-lg absolute bg-white flex flex-col top-0 h-screen z-20 transition-all duration-300 ease-in-out ${
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-opacity duration-300"
+          onClick={() => setSideBarOpen(false)}
+        />
+      )}
+
+      {/* Main navbar */}
+      <nav className="px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-40 w-full bg-transparent backdrop-blur-md py-4 shadow-sm">
+        {/* Sidebar menu */}
+        <div
+          className={`px-6 md:px-8 py-6 border-r border-gray-200 rounded-tr-2xl rounded-br-2xl absolute bg-white flex flex-col top-0 h-screen z-50 transition-all duration-300 ease-in-out shadow-2xl ${
             sideBarOpen
-              ? "translate-x-0 w-2/3 left-0"
-              : "translate-x-full w-0 -left-full"
+              ? "translate-x-0 w-[280px] xsm:w-[320px] left-0"
+              : "-translate-x-full w-0 -left-full"
           }`}
         >
-          <div className="flex justify-between items-center pb-3 border-b-[1px] border-gray-300 mb-3">
-            <h4 className="font-bold text-xl text-black">Categories</h4>
-            <IoClose
-              onClick={() => setSideBarOpen(!sideBarOpen)}
-              className="text-xl cursor-pointer"
-            />
+          {/* Sidebar header */}
+          <div className="flex justify-between items-center pb-4 border-b border-gray-200 mb-4">
+            <h4 className="font-bold text-xl text-gray-900">Categories</h4>
+            <button
+              onClick={() => setSideBarOpen(false)}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+              aria-label="Close menu"
+            >
+              <IoClose className="text-2xl text-gray-700" />
+            </button>
           </div>
-          <div>
+
+          {/* Categories list */}
+          <div className="flex-1 overflow-y-auto">
             {categories?.map((category, index) => {
+              const isActive = currentPath[currentPath.length - 1] === category.name;
               return (
                 <Link
-                  onClick={() => setSideBarOpen(!sideBarOpen)}
+                  onClick={() => setSideBarOpen(false)}
                   href={`/home/categories/${category.name}`}
                   className={`${
-                    currentPath[currentPath.length - 1] == category.name
-                      ? "bg-slate-200"
-                      : ""
-                  } flex items-center p-2 mb-[2px] rounded-md justify-between hover:bg-slate-200 text-black text-opacity-60`}
+                    isActive
+                      ? "bg-black text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  } flex items-center px-4 py-3 mb-1 rounded-lg justify-between transition-all duration-200 font-medium`}
                   key={index}
                 >
                   <p>{category.name}</p>
-                  <FaAngleRight />
+                  <FaAngleRight className={isActive ? "text-white" : "text-gray-400"} />
                 </Link>
               );
             })}
           </div>
-          <div onClick={() => setSideBarOpen(!sideBarOpen)}>{children}</div>
+
+          {/* Sidebar footer content */}
+          <div onClick={() => setSideBarOpen(false)} className="mt-auto pt-4 border-t border-gray-200">
+            {children}
+          </div>
         </div>
-        <div
-          className={`flex justify-between xsm:gap-3 xsm:justify-normal items-center `}
-        >
-          <div className="flex gap-2 items-center">
-            <IoMenu
+
+        {/* Main navigation content */}
+        <div className="flex justify-between xsm:gap-4 xsm:justify-normal items-center">
+          {/* Logo and menu button */}
+          <div className="flex gap-3 items-center">
+            <button
               onClick={() => setSideBarOpen(!sideBarOpen)}
-              className="cursor-pointer block lg:hidden text-3xl font-bold"
-            />
-            <Link href="/" className="font-bold text-2xl">
-              SHOP.C0
+              className="block lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+              aria-label="Open menu"
+            >
+              <IoMenu className="text-2xl font-bold text-gray-900" />
+            </button>
+            <Link 
+              href="/" 
+              className="font-extrabold text-2xl md:text-3xl tracking-tight bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent hover:from-gray-700 hover:to-black transition-all duration-300"
+            >
+              SHOP.CO
             </Link>
           </div>
-          <div className="items-center gap-2 hidden lg:flex">
-            <Link href="/products">OnSale</Link>
-            <Link href="/products">New Arrivals</Link>
-            <Link href="/products">Brands</Link>
-          </div>
-          <div className="flex xsm:flex-1 gap-3 items-center">
-            <Search placeholder="Search for products"/>
-            <Link href="/cart">
-              <div className="relative">
-                <FiShoppingCart className="text-[21px]" />
-                {cartCount > 0 && (
-                  <div className="bg-red-600 text-white rounded-full px-[5px] py-[1px]  text-[11px] absolute -top-[9px] -right-[9px]">
-                    {cartCount}
-                  </div>
-                )}
-              </div>
+
+          {/* Desktop navigation links */}
+          <div className="items-center gap-6 hidden lg:flex text-gray-700 font-medium">
+            <Link 
+              href="/products" 
+              className="hover:text-black transition-colors duration-200 relative group"
+            >
+              On Sale
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
+            <Link 
+              href="/products" 
+              className="hover:text-black transition-colors duration-200 relative group"
+            >
+              New Arrivals
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link 
+              href="/products" 
+              className="hover:text-black transition-colors duration-200 relative group"
+            >
+              Brands
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+          </div>
+
+          {/* Right side actions */}
+          <div className="flex xsm:flex-1 gap-3 xsm:gap-4 items-center justify-end">
+            {/* Search */}
+            <div className="hidden md:block flex-1 max-w-md">
+              <Search placeholder="Search for products" />
+            </div>
+
+            {/* Mobile search icon */}
+            <div className="block md:hidden">
+              <Search placeholder="Search" />
+            </div>
+
+            {/* Cart */}
+            <Link 
+              href="/cart"
+              className="relative p-2 hover:bg-gray-100 rounded-full transition-all duration-200 group"
+            >
+              <FiShoppingCart className="text-[22px] text-gray-700 group-hover:text-black transition-colors duration-200" />
+              {cartCount > 0 && (
+                <div className="bg-red-500 text-white rounded-full min-w-[20px] h-[20px] flex items-center justify-center text-[10px] font-bold absolute -top-1 -right-1 shadow-lg animate-pulse">
+                  {cartCount > 99 ? '99+' : cartCount}
+                </div>
+              )}
+            </Link>
+
+            {/* User section */}
             {session ? (
-              <div className="flex gap-[3px] items-center">
-                <p>{session?.user?.email?.split("@")[0]}</p>
-                <FaRegUserCircle />
+              <div className="flex gap-2 items-center px-3 py-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors duration-200">
+                <p className="text-sm font-medium text-gray-900 hidden sm:block">
+                  {session?.user?.email?.split("@")[0]}
+                </p>
+                <FaRegUserCircle className="text-xl text-gray-700" />
               </div>
             ) : (
               <Link
-                className="bg-black text-white rounded-full px-2 py-1"
+                className="bg-black text-white rounded-full px-5 py-2 text-sm font-semibold hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
                 href="/login"
               >
                 Login
@@ -114,8 +173,7 @@ export function NavBar({
             )}
           </div>
         </div>
-    
-      </div>
-    </div>
+      </nav>
+    </>
   );
 }
