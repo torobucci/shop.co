@@ -152,9 +152,6 @@ export function BottomNav() {
             <div className="border-t border-gray-300 pt-6 pb-8">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-600">
                     <p>© 2024 SHOP.CO. All rights reserved.</p>
-                    <div className="flex gap-6">
-                        <img src="/payment-badges.png" alt="Payment methods" className="h-6 opacity-70" />
-                    </div>
                 </div>
             </div>
         </div>
