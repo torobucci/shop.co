@@ -12,9 +12,10 @@ export default async function Page() {
           designed to bring out your individuality and cater to your sense of
           style.
         </p>
+      
         <Link
           href={`/products`}
-          className="max-w-[200px] text-center rounded-full px-6 py-3 uppercase bg-black text-white"
+          className="max-w-[200px] text-center rounded-full px-6 py-3 uppercase bg-black text-white font-semibold shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-out"
         >
           shop now
         </Link>
