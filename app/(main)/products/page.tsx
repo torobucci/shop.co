@@ -12,9 +12,12 @@ export default async function Page({
   const categories = await fetchCategories();
   return (
     <div className="mx-4 xsm:mx-6 md:mx-8 lg:mx-12 pt-[74px] pb-28">
-      <LinkHistory />
       <div className="flex gap-2">
-        <SideNav categories={categories} />
+        <div className="sticky top-20 overflow-y-auto self-start max-h-[calc(100vh-96px)]">
+          <LinkHistory />
+          <SideNav categories={categories} />
+        </div>
+
         <div className="grid flex-grow grid-cols-auto-fit-minmax gap-x-4 gap-y-6">
           {products?.map((product, index) => {
             return (
