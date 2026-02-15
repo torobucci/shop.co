@@ -7,7 +7,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { IoMenu } from "react-icons/io5";
 import { FaAngleRight } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { useContext } from "react";
 import { sessionContext } from "./SessionContext";
@@ -23,8 +23,23 @@ export function NavBar({
 }) {
   const session = useContext<{ user: { email: string } }>(sessionContext);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const currentPath = usePathname().split("/");
+
+  // Detect scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -36,8 +51,14 @@ export function NavBar({
         />
       )}
 
-      {/* Main navbar */}
-      <nav className="px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-40 w-full bg-transparent backdrop-blur-md py-4 shadow-sm">
+      {/* Main navbar - only bg and shadow change on scroll */}
+      <nav 
+        className={`px-4 xsm:px-6 md:px-8 lg:px-12 fixed z-40 w-full backdrop-blur-md py-4 transition-all duration-300 ${
+          isScrolled 
+            ? "bg-white/95 shadow-md" 
+            : "bg-transparent shadow-sm"
+        }`}
+      >
         {/* Sidebar menu */}
         <div
           className={`px-6 md:px-8 py-6 border-r border-gray-200 rounded-tr-2xl rounded-br-2xl absolute bg-white flex flex-col top-0 h-screen z-50 transition-all duration-300 ease-in-out shadow-2xl ${
