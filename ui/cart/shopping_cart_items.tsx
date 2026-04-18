@@ -5,9 +5,11 @@ import {
   increaseQuantity,
   decreaseQuantity,
   deleteCartItem,
+  submitOrderRequest,
 } from "../../lib/actions";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import { Session } from "next-auth";
 
 function CartItem({ cartItem }: { cartItem: ShoppingCartItem }) {
   const [quantity, setQuantity] = useState(cartItem.quantity);
@@ -69,11 +71,19 @@ function CartItem({ cartItem }: { cartItem: ShoppingCartItem }) {
 
 export default function ShoppingCartItems({
   shoppingCartItems,
+  session
 }: {
-  shoppingCartItems: ShoppingCartItem[];
+  shoppingCartItems: ShoppingCartItem[],
+  session: Session | null
 }) {
   const [totalCost, setTotalCost] = useState(0);
+  const handlePayment = async() => {
+    const data = await submitOrderRequest({ amount:totalCost, email: session?.user?.email});
+      if(data?.url){
+        window.location.href = data.url;
+      }
 
+  }
   useEffect(() => {
     let cost = 0;
     shoppingCartItems.forEach((el) => {
@@ -117,8 +127,8 @@ export default function ShoppingCartItems({
             2
           )}`}</p>
         </div>
-        <button className="bg-black w-full px-6 py-2.5 flex-[3] rounded-3xl  text-white">
-          Go to Checkout
+        <button className="bg-black w-full px-6 py-2.5 flex-[3] rounded-3xl  text-white" onClick={handlePayment}>
+          Make Order
         </button>
       </div>
     </div>
